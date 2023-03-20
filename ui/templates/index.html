@@ -12,11 +12,16 @@
   </head>
   <body style="text-align: center; margin: 3rem;">
     <!-- Header -->
-    <h1>Crop Disease Detection Algorithm {{ prediction }}</h1>
+    <h1>Crop Disease Detection AI</h1>
     <h2> <small><i>─────────────── IB Group 4 Project ───────────────</i><br>Abyan M, Pelita, Syara, Hafizh</small></h2>
     <br>
     <!-- Content -->
-    <p style="margin: 0">Input an image of a crop below!</p>
+    <p style="margin-bottom: 0">Chosen element: Heart</p>
+    <p style="margin-bottom: 1.5rem;">Accuracy: 93.3%</p>
+    <p style="margin-bottom: 1.5rem;"><a href="https://github.com/abyanmajid/group4project/blob/main/model.ipynb" class="btn btn-success">See Algorithm Code</a></p>
+    ────────────────────────────────────────────────────────────<br>
+    <h4 style="margin-top:1.5rem;"><small><strong>Diagnose Your Crop!</strong></small></h4>
+    <p style="margin-top: 1.5rem; margin-bottom: 0;">Input an image of a crop below.</p>
     <p style="margin: 3">The image MUST have 256x256 px resolution!</p>
     <div class="row" style="justify-content: center;">
         
@@ -38,7 +43,7 @@
         </form>
         {% if file_url %}
             <div class="container" style="margin-top: 1.5rem;">
-                <img src="..{{ file_url }}" style="width: 256px; height: 256px;">
+                <img src="../static/black-cherry-leaf_1_1.jpg" style="width: 256px; height: 256px;">
             </div>
             <div class="container" style="margin-top: 1rem;">
                 {% if prediction == 1 %}
@@ -48,6 +53,62 @@
                 {% endif %}
             </div>
         {% endif %}
+    </div>
+    <p style="margin-top: 1.5rem;">
+    ────────────────────────────────────────────────────────────
+    </p>
+    <div class="container" style="text-align: center; margin-top: 1.5rem; padding-left: 10rem; padding-right: 10rem;">
+        <p>
+            <strong>Objective:</strong>
+            <br>
+            Our aritificial intelligence algorithm aims to assist farmers and other people in
+            separating diseased crop from healthy crops. Our AI ought to detect, based on patterns, clues
+            of powdering, rusting, blighting, rotting, bacteria-affected crops.
+        </p>
+    </div>
+    <div class="container" style="margin-top: 2.5rem; text-align: left;">
+        <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <strong>Strengths:</strong><br>
+            <ul>
+                <li>93.3% prediction accuracy; It is strongly accurate</li>
+                <li>It is extrapolatable to any crop/plant beyond the dataset</li>
+                <li>It uses a residual neural network, therefore overcoming the vanishing gradient problem</li>
+            </ul>
+        </div>
+        <div class="col-lg-6 mx-auto">
+            <strong>Weaknesses:</strong><br>
+            <ul>
+                <li>Image in UI doesn't load when uploaded</li>
+                <li>The image has to have a resolution of exactly 256x256 pixels, otherwise the AI software crashes</li>
+                <li>It does not give confidence level, i.e. % disease</li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div class="container" style="margin-top: 1.5rem; text-align: left;">
+        <strong>The underlying logic</strong><br>
+        <img src="https://i.ibb.co/m5XSKLg/Screenshot-2023-03-20-094632.png" style="width:75%; height: 75%;">
+        <p style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+            A tensor of an image of a crop gets feed into the algorithm as an input. 
+            A tensor is just an array of numbers that make up the RGB values comprising 
+            the image. Then, the image tensor gets processed through all layers until the output.
+            There are 4 convolutional layers, all of which are assigned a reLU activation function. 
+            In each layer, the parameters of the AI model (e.g. w and b in f(w, b)) is attempted to be minimized through gradient
+            descent. Gradient descent is process wherein the parameters of a mathematical function is continuously decreased until
+            through partial derivatives until a local minima is reached. Until then, the parameters are passed onto the next layer
+            and the process repeats.
+        </p>
+        <img src="https://i.ibb.co/N7yk5zy/1-U-Wqy-Y5vnhx-PPVs-QBg-xg.png" alt="">
+        <p style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+            The decision to declare "diseased" or "healthy" is based based on a logistic regression with 
+            range = {y | 0 ≤ y ≤ 1}, where:
+            <ul>
+                <li>y : the probability that a crop is diseased</li>
+                <li>x : all determinants of y compiled into one value</li>
+            </ul>
+            if the modelled value is less than the threshold, the AI assumes that the crop is healthy. But if it's greater than the threshold, the AI assumes diseased.
+        </p>
     </div>
     <!-- Bootstrap Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
